@@ -143,3 +143,45 @@ void BinaryTree::preorderTraverse(Node* node)
 	preorderTraverse(node->right);
 }
 
+BinaryTree::Node* BinaryTree::searchNode(Data num)
+{
+	//find where to set the Node.
+	Node* iterator = root;
+	while(iterator != NULL)
+	{
+		if(iterator->data == num) //if Node is found return the node.
+		{
+			return iterator;
+		}
+		else if (iterator->data >= num) //if currentNode value is greater or equal than a value to search
+		{
+			//move to left child
+			iterator = iterator->left;
+		}
+		else if(iterator->data < num) //if currentNode value is less than a value to search
+		{
+			//move to right child
+			iterator = iterator->right;
+		}
+	}//while
+
+	//if node isn't found, return NULL
+	return NULL;
+}
+
+bool BinaryTree::searchNodeByValue(Data num)
+{
+	Node* node = searchNode(num);
+	if(node == NULL)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+
+}
+
+
+

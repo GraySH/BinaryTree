@@ -33,5 +33,10 @@ int main()
 	bTree.preorderTraverse(bTree.getRoot());
 	cout << endl;
 
+
+	//search node that has value of 6, return true if value is found in the tree
+	cout << bTree.searchNodeByValue(6);
+
+
 	return 0;
 }

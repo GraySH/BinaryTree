@@ -37,7 +37,8 @@ public:
 	void postorderTraverse(Node* node);
 	void preorderTraverse(Node* node);
 
-
+	Node* searchNode(Data num);
+	bool searchNodeByValue(Data num);
 
 };
 
