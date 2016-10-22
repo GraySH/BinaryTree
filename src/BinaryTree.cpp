@@ -8,7 +8,6 @@
 #include "BinaryTree.h"
 
 
-
 BinaryTree::BinaryTree()
 {
 	init();
@@ -21,10 +20,12 @@ BinaryTree::~BinaryTree()
 
 void BinaryTree::init()
 {
-	root = new Node();
-	root->data = 777;
-	root->left = NULL;
-	root->right = NULL;
+
+	root = NULL;
+//	root = new Node();
+//	root->data = 0;
+//	root->left = NULL;
+//	root->right = NULL;
 }
 
 BinaryTree::Node* BinaryTree::makeNewNode(Data num)
@@ -59,4 +60,67 @@ BinaryTree::Node* BinaryTree::getRightChild(Node* node)
 {
 	return node->right;
 }
+
+
+void BinaryTree::insertNode(Data num)
+{
+	//make new node with num
+	Node* newNode = makeNewNode(num);
+
+	//if root is null, add newNode as root node.
+	if(root == NULL)
+	{
+		root = newNode;
+		return;
+	}
+
+	//find where to set the Node.
+	Node* iterator = root;
+	while(iterator != NULL)
+	{
+		if(iterator->data >= newNode->data) //if currentNode is greater or equal than newNode data
+		{
+			//if child node is NULL, add new data to the child position of current node
+			if(iterator->left == NULL)
+			{
+				iterator->left = newNode;
+				return;
+			}
+			else
+			{
+				iterator = iterator->left;
+			}
+
+		}
+		else if(iterator->data < newNode->data ) //currentNode value is less than newNode value
+		{
+			//if child node is NULL, add new data to the child position of current node
+			if(iterator->right == NULL)
+			{
+				iterator->right = newNode;
+				return;
+			}
+			else
+			{
+				iterator = iterator->right;
+			}
+		}
+	}//while
+}//insertNode
+
+
+
+void BinaryTree::inorderTraverse(Node* node)
+{
+	if(node == NULL)
+	{
+		return;
+	}
+	inorderTraverse(node->left);
+	cout << node->data << " ";
+	inorderTraverse(node->right);
+}
+
+
+
 

@@ -13,10 +13,15 @@ int main()
 {
 	BinaryTree bTree;
 
-	bTree.setLeftChild(bTree.getRoot(), bTree.makeNewNode(1));
-	bTree.setRightChild(bTree.getRoot(), bTree.makeNewNode(2));
+	bTree.insertNode(5);
+	bTree.insertNode(3);
+	bTree.insertNode(1);
+	bTree.insertNode(2);
+	bTree.insertNode(6);
+	bTree.insertNode(8);
 
 
+	bTree.inorderTraverse(bTree.getRoot());
 
 	return 0;
 }

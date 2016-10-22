@@ -1,7 +1,7 @@
 //Binary Tree
 #include <iostream>
 
-
+using namespace std;
 typedef int Data;
 
 class BinaryTree
@@ -23,6 +23,8 @@ public:
 
 	void init();
 
+	void insertNode(Data num);
+
 	Node* makeNewNode(Data num);
 	void setLeftChild(Node* parentNode, Node* newNode);
 	void setRightChild(Node* parentNode, Node* newNode);
@@ -30,6 +32,10 @@ public:
 	Node* getRoot();
 	Node* getLeftChild(Node* node);
 	Node* getRightChild(Node* node);
+
+	void inorderTraverse(Node* node);
+
+
 
 };
 
