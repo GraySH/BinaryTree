@@ -21,7 +21,17 @@ int main()
 	bTree.insertNode(8);
 
 
+	cout << "Inorder: ";
 	bTree.inorderTraverse(bTree.getRoot());
+	cout << endl;
+
+	cout << "Postorder: ";
+	bTree.postorderTraverse(bTree.getRoot());
+	cout << endl;
+
+	cout << "Preorder: ";
+	bTree.preorderTraverse(bTree.getRoot());
+	cout << endl;
 
 	return 0;
 }

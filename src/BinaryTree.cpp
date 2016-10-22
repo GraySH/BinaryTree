@@ -109,7 +109,6 @@ void BinaryTree::insertNode(Data num)
 }//insertNode
 
 
-
 void BinaryTree::inorderTraverse(Node* node)
 {
 	if(node == NULL)
@@ -121,6 +120,26 @@ void BinaryTree::inorderTraverse(Node* node)
 	inorderTraverse(node->right);
 }
 
+void BinaryTree::postorderTraverse(Node* node)
+{
+	if(node == NULL)
+	{
+		return;
+	}
+	postorderTraverse(node->left);
+	postorderTraverse(node->right);
+	cout << node->data << " ";
+}
 
 
+void BinaryTree::preorderTraverse(Node* node)
+{
+	if(node == NULL)
+	{
+		return;
+	}
+	cout << node->data << " ";
+	preorderTraverse(node->left);
+	preorderTraverse(node->right);
+}
 

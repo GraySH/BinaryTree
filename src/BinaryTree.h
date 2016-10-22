@@ -34,6 +34,8 @@ public:
 	Node* getRightChild(Node* node);
 
 	void inorderTraverse(Node* node);
+	void postorderTraverse(Node* node);
+	void preorderTraverse(Node* node);
 
 
 
