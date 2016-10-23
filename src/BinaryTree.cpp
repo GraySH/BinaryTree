@@ -14,12 +14,23 @@ BinaryTree::BinaryTree()
 
 BinaryTree::~BinaryTree()
 {
-	//delete &root;
+	freeMemory(root);
 };
+
+void BinaryTree::freeMemory(Node* node)
+{
+	//delete nodes.
+	if(node == NULL)
+	{
+		return;
+	}
+	freeMemory(node->left);
+	freeMemory(node->right);
+	delete node;
+}
 
 void BinaryTree::init()
 {
-
 	root = NULL;
 //	root = new Node();
 //	root->data = 0;
@@ -228,8 +239,8 @@ void BinaryTree::deleteNode(Data num)
 
 	if(parentNodeOfDeleteNode != NULL)
 	{
-		//check delete node is left child or right children
-		if( (parentNodeOfDeleteNode->left != NULL) && (parentNodeOfDeleteNode->left->data == num) ) //left Node need to be deleted.
+		//left Node need to be deleted.
+		if( (parentNodeOfDeleteNode->left != NULL) && (parentNodeOfDeleteNode->left->data == num) )
 		{
 			//if delete Node is terminal node, simply delete it
 			if( (parentNodeOfDeleteNode->left->right == NULL) && (parentNodeOfDeleteNode->left->left == NULL) )

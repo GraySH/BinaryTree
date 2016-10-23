@@ -44,6 +44,9 @@ public:
 
 	bool searchNodeByValue(Data num);
 
+	//delete nodes, free memeory.
+	void freeMemory(Node* node);
+
 
 	void deleteNode(Data num);
 
