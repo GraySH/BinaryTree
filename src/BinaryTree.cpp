@@ -7,7 +7,6 @@
 
 #include "BinaryTree.h"
 
-
 BinaryTree::BinaryTree()
 {
 	init();
@@ -180,8 +179,141 @@ bool BinaryTree::searchNodeByValue(Data num)
 	{
 		return true;
 	}
-
 }
+
+BinaryTree::Node* BinaryTree::searchParentNode(Data num, Node* head)
+{
+	if(head == NULL)
+	{
+		return NULL;
+	}
+	//start from root node.
+	Node* iterator = head->right;
+	Node* parent = head;
+
+	while(iterator != NULL)
+	{
+		if(iterator->data == num)
+		{
+			return parent;
+		}
+		else if (iterator->data >= num) //if currentNode value is greater or equal than a value to search
+		{
+			//assign current node as parent node before move to a left child of current node
+			parent = iterator;
+			//move to left child
+			iterator = iterator->left;
+		}
+		else if(iterator->data < num) //if currentNode value is less than a value to search
+		{
+			//assign current node as parent node before move to a left child of current node
+			parent = iterator;
+			//move to right child
+			iterator = iterator->right;
+		}
+	}
+	return NULL;
+}
+
+void BinaryTree::deleteNode(Data num)
+{
+	//make virtual root node to padding root.
+	Node* virtualRootNode = new Node;
+
+	//assign virtual root node right child to root
+	virtualRootNode->right = root;
+
+	//find node from a tree
+	Node* parentNodeOfDeleteNode = searchParentNode(num, virtualRootNode);
+
+	if(parentNodeOfDeleteNode != NULL)
+	{
+		//check delete node is left child or right children
+		if( (parentNodeOfDeleteNode->left != NULL) && (parentNodeOfDeleteNode->left->data == num) ) //left Node need to be deleted.
+		{
+			//if delete Node is terminal node, simply delete it
+			if( (parentNodeOfDeleteNode->left->right == NULL) && (parentNodeOfDeleteNode->left->left == NULL) )
+			{
+				//delete right child of parent node.
+				delete parentNodeOfDeleteNode->left;
+
+				//assign NULL
+				parentNodeOfDeleteNode->left = NULL;
+				return;
+			}
+
+			//find smallest node from right child tree to replace number value of a node, which is go far left.
+			Node* smallestNode = parentNodeOfDeleteNode->left->right;
+			Node* smallestNodeparent = parentNodeOfDeleteNode->left;
+			while(smallestNode->left != NULL)
+			{
+				smallestNodeparent = smallestNode;
+				smallestNode = smallestNode->left;
+			}
+			//copy node value from smallest node value to node to be deleted.
+			parentNodeOfDeleteNode->left->data = smallestNode->data;
+
+			//delete smallest Node
+			if(smallestNodeparent->left == smallestNode) // smallest node is left child of parentNode
+			{
+				smallestNodeparent->left = smallestNode->right;
+			}
+			else if(smallestNodeparent->right == smallestNode) // smallest node is right child of parentNode
+			{
+				smallestNodeparent->right = smallestNode->right;
+			}
+
+			//delete smallest Node
+			delete smallestNode;
+
+		}//if(parentNodeOfDeleteNode->left == num)
+		else if( (parentNodeOfDeleteNode->right != NULL) && (parentNodeOfDeleteNode->right->data == num) ) //right Node need to be deleted.
+		{
+			//if delete Node is terminal node, simply delete it
+			if( (parentNodeOfDeleteNode->right->right == NULL) && (parentNodeOfDeleteNode->right->left == NULL) )
+			{
+				//delete right child of parent node.
+				delete parentNodeOfDeleteNode->right;
+
+				//assign NULL
+				parentNodeOfDeleteNode->right = NULL;
+				return;
+			}
+
+			//find smallest node from right child tree to replace number value of a node, which is go far left.
+			Node* smallestNode = parentNodeOfDeleteNode->right->right;
+			Node* smallestNodeparent = parentNodeOfDeleteNode->right;
+
+			while(smallestNode->left != NULL)
+			{
+				smallestNodeparent = smallestNode;
+				smallestNode = smallestNode->left;
+			}
+			//copy node value from smallest node value to node to be deleted.
+			parentNodeOfDeleteNode->right->data = smallestNode->data;
+
+			//delete smallest Node
+			if(smallestNodeparent->left == smallestNode) // smallest node is left child of parentNode
+			{
+				smallestNodeparent->left = smallestNode->right;
+			}
+			else if(smallestNodeparent->right == smallestNode) // smallest node is right child of parentNode
+			{
+				smallestNodeparent->right = smallestNode->right;
+			}
+			delete smallestNode;
+		}
+	}//if(parentNodeOfDeleteNode != NULL)
+
+	//delete virtualRootNode
+	delete virtualRootNode;
+}
+
+
+
+
+
+
 
 
 

@@ -38,7 +38,14 @@ public:
 	void preorderTraverse(Node* node);
 
 	Node* searchNode(Data num);
+
+	//find parent node of a node that has a value to search
+	Node* searchParentNode(Data num, Node* head);
+
 	bool searchNodeByValue(Data num);
+
+
+	void deleteNode(Data num);
 
 };
 
